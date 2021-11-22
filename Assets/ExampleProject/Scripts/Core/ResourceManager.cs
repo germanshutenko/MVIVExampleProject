@@ -1,0 +1,25 @@
+using System;
+using UnityEngine;
+
+namespace ExampleProject
+{
+    public class ResourceManager : IResourceManager
+    {
+        public T CreatePrefabInstance<T, E>(E item) where E : Enum
+        {
+            var prefab = CreatePrefabInstance(item);
+            var result = prefab.GetComponent<T>();
+
+            return result;
+        }
+
+        public GameObject CreatePrefabInstance<E>(E item) where E : Enum
+        {
+            var path = string.Format("{0}/{1}", typeof(E).Name, item.ToString());
+            var asset = Resources.Load<GameObject>(path);
+            var result = GameObject.Instantiate(asset);
+
+            return result;
+        }
+    }
+}
