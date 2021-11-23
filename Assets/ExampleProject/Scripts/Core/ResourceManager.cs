@@ -21,5 +21,15 @@ namespace ExampleProject
 
             return result;
         }
+
+        public T GetAsset<T, E>(E item)
+            where T : UnityEngine.Object
+            where E : Enum
+        {
+            var path = string.Format("{0}/{1}", typeof(E).Name, item.ToString());
+            var result = Resources.Load<T>(path);
+
+            return result;
+        }
     }
 }

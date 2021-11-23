@@ -1,3 +1,5 @@
+using System;
+
 namespace ExampleProject
 {
     public interface IGameSettings

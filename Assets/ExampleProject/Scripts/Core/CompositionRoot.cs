@@ -14,6 +14,9 @@ namespace ExampleProject
         private static IConfiguration Configuration;
         private static IResourceManager ResourceManager;
 
+        private static IMainMenu MainMenu;
+        private static ISettingsMenu SettingsMenu;
+
         public static IResourceManager GetResourceManager()
         {
             if (ResourceManager == null)
@@ -22,6 +25,19 @@ namespace ExampleProject
             }
 
             return ResourceManager;
+        }
+
+        private void OnDestroy()
+        {
+            UIRoot = null;
+            Player = null;
+            UserInput = null;
+            GameCamera = null;
+            ViewFactory = null;
+            AudioManager = null;
+
+            MainMenu = null;
+            SettingsMenu = null;
         }
 
         public static IConfiguration GetConfiguration()
@@ -95,7 +111,7 @@ namespace ExampleProject
         {
             if (AudioManager == null)
             {
-                AudioManager = new AudioManager();
+                AudioManager = MonoExtensions.CreateComponent<AudioManager>();
             }
 
             return AudioManager;
@@ -111,6 +127,26 @@ namespace ExampleProject
             }
 
             return UIRoot;
+        }
+
+        public static IMainMenu GetMainMenu()
+        {
+            if (MainMenu == null)
+            {
+                MainMenu = MonoExtensions.CreateComponent<MainMenu>();
+            }
+
+            return MainMenu;
+        }
+
+        public static ISettingsMenu GetSettingsMenu()
+        {
+            if (SettingsMenu == null)
+            {
+                SettingsMenu = MonoExtensions.CreateComponent<SettingsMenu>();
+            }
+
+            return SettingsMenu;
         }
     }
 }

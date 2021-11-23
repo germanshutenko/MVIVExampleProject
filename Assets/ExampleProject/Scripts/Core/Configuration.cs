@@ -8,7 +8,10 @@ namespace ExampleProject
         {
             PlayerProperties = new PlayerProperties()
             {
-                MovingForce = 6f
+                MovingForce = 6f,
+                BumpVelocity = 0.2f,
+                DamageVelocity = 2f,
+                CrashVelocity = 4f
             };
         }
 

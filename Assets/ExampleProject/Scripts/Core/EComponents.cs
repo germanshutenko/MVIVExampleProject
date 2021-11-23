@@ -4,6 +4,8 @@ namespace ExampleProject
     {
         UIRoot,
         GameCamera,
-        Player
+        Player,
+        MusicAudioMixer,
+        EffectsAudioMixer
     }
 }
