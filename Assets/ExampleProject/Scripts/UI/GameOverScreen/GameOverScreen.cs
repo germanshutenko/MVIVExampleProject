@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ExampleProject
 {
-    public class GameOver : MonoBehaviour, IGameOver
+    public class GameOverScreen : MonoBehaviour, IGameOverScreen
     {
         public event Action NextClicked = () => { };
 
@@ -12,9 +12,14 @@ namespace ExampleProject
         private void Awake()
         {
             var viewFactory = CompositionRoot.GetViewFactory();
-
             View = viewFactory.CreateGameOver();
 
+            View.NextClicked += OnNextClicked;
+        }
+
+        private void OnNextClicked()
+        {
+            NextClicked();
         }
 
         public void Show()

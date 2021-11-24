@@ -3,11 +3,13 @@ namespace ExampleProject
     public class ViewFactory : IViewFactory
     {
         private IUIRoot UIRoot;
+        private ISceneManager SceneManager;
         private IResourceManager ResourceManager;
 
-        public ViewFactory(IUIRoot uiRoot, IResourceManager resourceManager)
+        public ViewFactory(IUIRoot uiRoot, IResourceManager resourceManager, ISceneManager sceneManager)
         {
             UIRoot = uiRoot;
+            SceneManager = sceneManager;
             ResourceManager = resourceManager;
         }
 
@@ -37,7 +39,17 @@ namespace ExampleProject
 
         public ISettingsMenuView CreateSettingsMenu()
         {
-            var view = ResourceManager.CreatePrefabInstance<ISettingsMenuView, EViews>(EViews.SettingsMenu);
+            ISettingsMenuView view;
+
+            if (SceneManager.CurrentScene == EScenes.GameScene)
+            {
+                view = ResourceManager.CreatePrefabInstance<ISettingsMenuView, EViews>(EViews.InGameSettingsMenu);
+            }
+            else
+            {
+                view = ResourceManager.CreatePrefabInstance<ISettingsMenuView, EViews>(EViews.SettingsMenu);
+            }
+
             view.SetParent(UIRoot.OverlayCanvas);
 
             return view;

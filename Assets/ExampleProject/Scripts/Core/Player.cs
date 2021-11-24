@@ -56,10 +56,7 @@ namespace ExampleProject
             {
                 AudioManager.PlayEffect(EAudio.Crash);
 
-                Health -= 10f;
-                Health = Mathf.Clamp(Health, 0f, MaxHealth);
-
-                HealthChanged(Health);
+                DecreaseHealth(10f);
 
                 return;
             }
@@ -68,10 +65,7 @@ namespace ExampleProject
             {
                 AudioManager.PlayEffect(EAudio.Damage);
 
-                Health -= 5f;
-                Health = Mathf.Clamp(Health, 0f, MaxHealth);
-
-                HealthChanged(Health);
+                DecreaseHealth(5f);
 
                 return;
             }
@@ -80,6 +74,21 @@ namespace ExampleProject
             {
                 AudioManager.PlayEffect(EAudio.Bump);
                 return;
+            }
+        }
+
+        private void DecreaseHealth(float value)
+        {
+            Health -= value;
+            Health = Mathf.Clamp(Health, 0f, MaxHealth);
+
+            HealthChanged(Health);
+
+            if (Health == 0f)
+            {
+                Died();
+
+                gameObject.SetActive(false);
             }
         }
 

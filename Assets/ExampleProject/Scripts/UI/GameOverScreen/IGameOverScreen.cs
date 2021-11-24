@@ -2,7 +2,7 @@ using System;
 
 namespace ExampleProject
 {
-    public interface IGameOver : IScreen
+    public interface IGameOverScreen : IScreen
     {
         event Action NextClicked;
     }

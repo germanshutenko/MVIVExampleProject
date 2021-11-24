@@ -6,11 +6,17 @@ namespace ExampleProject
     public class UserInput : MonoBehaviour, IUserInput
     {
         public event Action<Vector2> DirectionChanged = direction => { };
+        public event Action Escaped = () => { };
 
         public bool IsLocked { get; set; }
 
         private void FixedUpdate()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Escaped();
+            }
+
             if (IsLocked == true)
             {
                 return;

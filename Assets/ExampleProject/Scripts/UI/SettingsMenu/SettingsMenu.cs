@@ -9,10 +9,12 @@ namespace ExampleProject
 
         private ISettingsMenuView View;
 
+        private IAudioManager AudioManager;
         private IGameSettings GameSettings;
 
         private void Awake()
         {
+            AudioManager = CompositionRoot.GetAudioManager();
             GameSettings = CompositionRoot.GetGameSettings();
             var viewFactory = CompositionRoot.GetViewFactory();
 
@@ -45,6 +47,8 @@ namespace ExampleProject
 
             GameSettings.IsMusicOn = isMusicOn;
             View.SetMusicParameter(isMusicOn);
+
+            AudioManager.SetMusicActive(isMusicOn);
         }
 
         private void OnSoundEffectsClicked()
@@ -53,6 +57,8 @@ namespace ExampleProject
 
             GameSettings.IsSoundEffectsOn = isSoundEffectsOn;
             View.SetSoundEffectsParameter(isSoundEffectsOn);
+
+            AudioManager.SetEffectsActive(isSoundEffectsOn);
         }
 
         private void OnBackClicked()

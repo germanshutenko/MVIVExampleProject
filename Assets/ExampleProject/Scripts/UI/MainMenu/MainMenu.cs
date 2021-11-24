@@ -6,11 +6,13 @@ namespace ExampleProject
     public class MainMenu : MonoBehaviour, IMainMenu
     {
         private IMainMenuView View;
-
         private ISettingsMenu SettingsMenu;
+
+        private ISceneManager SceneManager;
 
         private void Awake()
         {
+            SceneManager = CompositionRoot.GetSceneManager();
             SettingsMenu = CompositionRoot.GetSettingsMenu();
             var viewFactory = CompositionRoot.GetViewFactory();
 
@@ -47,7 +49,7 @@ namespace ExampleProject
 
         private void OnNewGameClicked()
         {
-            SceneManager.LoadScene(EScenes.GameScene.ToString());
+            SceneManager.LoadScene(EScenes.GameScene);
         }
 
         private void OnExitClicked()

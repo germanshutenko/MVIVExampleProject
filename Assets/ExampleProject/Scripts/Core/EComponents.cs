@@ -6,6 +6,7 @@ namespace ExampleProject
         GameCamera,
         Player,
         MusicAudioMixer,
-        EffectsAudioMixer
+        EffectsAudioMixer,
+        EventSystem
     }
 }

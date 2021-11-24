@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ExampleProject
 {
@@ -8,14 +9,16 @@ namespace ExampleProject
         private static IPlayer Player;
         private static IUserInput UserInput;
         private static IGameCamera GameCamera;
+        private static EventSystem EventSystem;
         private static IViewFactory ViewFactory;
         private static IGameSettings GameSettings;
+        private static ISceneManager SceneManager;
         private static IAudioManager AudioManager;
         private static IConfiguration Configuration;
         private static IResourceManager ResourceManager;
 
         private static IGameHUD GameHUD;
-        private static IGameOver GameOver;
+        private static IGameOverScreen GameOver;
         private static IMainMenu MainMenu;
         private static ISettingsMenu SettingsMenu;
 
@@ -35,9 +38,11 @@ namespace ExampleProject
             Player = null;
             UserInput = null;
             GameCamera = null;
+            EventSystem = null;
             ViewFactory = null;
             AudioManager = null;
 
+            GameHUD = null;
             GameOver = null;
             MainMenu = null;
             SettingsMenu = null;
@@ -51,6 +56,27 @@ namespace ExampleProject
             }
 
             return Configuration;
+        }
+
+        public static ISceneManager GetSceneManager()
+        {
+            if (SceneManager == null)
+            {
+                SceneManager = new SceneManager();
+            }
+
+            return SceneManager;
+        }
+
+        public static EventSystem GetEventSystem()
+        {
+            if (EventSystem == null)
+            {
+                var resourceManager = GetResourceManager();
+                EventSystem = resourceManager.CreatePrefabInstance<EventSystem, EComponents>(EComponents.EventSystem);
+            }
+
+            return EventSystem;
         }
 
         public static IPlayer GetPlayer()
@@ -92,9 +118,10 @@ namespace ExampleProject
             if (ViewFactory == null)
             {
                 var uiRoot = GetUIRoot();
+                var sceneManager = GetSceneManager();
                 var resourceManager = GetResourceManager();
 
-                ViewFactory = new ViewFactory(uiRoot, resourceManager);
+                ViewFactory = new ViewFactory(uiRoot, resourceManager, sceneManager);
             }
 
             return ViewFactory;
@@ -162,11 +189,11 @@ namespace ExampleProject
             return GameHUD;
         }
 
-        public static IGameOver GetGameOver()
+        public static IGameOverScreen GetGameOverScreen()
         {
             if (GameOver == null)
             {
-                GameOver = MonoExtensions.CreateComponent<GameOver>();
+                GameOver = MonoExtensions.CreateComponent<GameOverScreen>();
             }
 
             return GameOver;

@@ -5,26 +5,75 @@ namespace ExampleProject
     public class GameScene : MonoBehaviour
     {
         private IPlayer Player;
-        private IGameHUD GameHUD;
         private IUserInput UserInput;
         private IGameCamera GameCamera;
         private IConfiguration Configuration;
 
+        private IGameHUD GameHUD;
+        private ISceneManager SceneManager;
+        private ISettingsMenu SettingsMenu;
+        private IGameOverScreen GameOverScreen;
+
         private void Awake()
         {
             Player = CompositionRoot.GetPlayer();
-            GameHUD = CompositionRoot.GetGameHUD();
             UserInput = CompositionRoot.GetUserInput();
             GameCamera = CompositionRoot.GetGameCamera();
             Configuration = CompositionRoot.GetConfiguration();
 
+            GameHUD = CompositionRoot.GetGameHUD();
+            SettingsMenu = CompositionRoot.GetSettingsMenu();
+            GameOverScreen = CompositionRoot.GetGameOverScreen();
+
+            var eventSystem = CompositionRoot.GetEventSystem();
+            var gameSettings = CompositionRoot.GetGameSettings();
+            var audioManager = CompositionRoot.GetAudioManager();
+
             GameCamera.SetTarget(Player);
 
-            UserInput.DirectionChanged += OnDirectionChanged;
+            GameHUD.Show();
+            SettingsMenu.Hide();
+            GameOverScreen.Hide();
 
+            var isMusicOn = gameSettings.IsMusicOn;
+            var isSoundEffectsOn = gameSettings.IsSoundEffectsOn;
+
+            audioManager.SetMusicActive(isMusicOn);
+            audioManager.SetEffectsActive(isSoundEffectsOn);
+
+            UserInput.DirectionChanged += OnDirectionChanged;
+            UserInput.Escaped += OpenSettings;
+
+            Player.Died += OnPlayerDied;
             Player.HealthChanged += OnlayerHealthChanged;
             Player.MaxHealthChanged += OnPlayerMaxHealthChanged;
 
+            GameOverScreen.NextClicked += ExitGame;
+            SettingsMenu.BackClicked += CloseSettings;
+        }
+
+        private void OpenSettings()
+        {
+            GameHUD.Hide();
+            SettingsMenu.Show();
+        }
+
+        private void CloseSettings()
+        {
+            SettingsMenu.Hide();
+            GameHUD.Show();
+        }
+
+        private void ExitGame()
+        {
+            GameOverScreen.Hide();
+            SceneManager.LoadScene(EScenes.FirstScene);
+        }
+
+        private void OnPlayerDied()
+        {
+            GameHUD.Hide();
+            GameOverScreen.Show();
         }
 
         private void OnPlayerMaxHealthChanged(float maxHealth)

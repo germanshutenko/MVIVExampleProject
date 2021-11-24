@@ -5,6 +5,7 @@ namespace ExampleProject
         GameHUD,
         MainMenu,
         GameOver,
-        SettingsMenu
+        SettingsMenu,
+        InGameSettingsMenu
     }
 }
