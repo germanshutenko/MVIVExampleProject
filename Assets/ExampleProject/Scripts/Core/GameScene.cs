@@ -5,6 +5,7 @@ namespace ExampleProject
     public class GameScene : MonoBehaviour
     {
         private IPlayer Player;
+        private IGameHUD GameHUD;
         private IUserInput UserInput;
         private IGameCamera GameCamera;
         private IConfiguration Configuration;
@@ -12,6 +13,7 @@ namespace ExampleProject
         private void Awake()
         {
             Player = CompositionRoot.GetPlayer();
+            GameHUD = CompositionRoot.GetGameHUD();
             UserInput = CompositionRoot.GetUserInput();
             GameCamera = CompositionRoot.GetGameCamera();
             Configuration = CompositionRoot.GetConfiguration();
@@ -19,6 +21,22 @@ namespace ExampleProject
             GameCamera.SetTarget(Player);
 
             UserInput.DirectionChanged += OnDirectionChanged;
+
+            Player.HealthChanged += OnlayerHealthChanged;
+            Player.MaxHealthChanged += OnPlayerMaxHealthChanged;
+
+        }
+
+        private void OnPlayerMaxHealthChanged(float maxHealth)
+        {
+            var normalizedHealth = Player.Health / maxHealth;
+            GameHUD.SetHealth(normalizedHealth);
+        }
+
+        private void OnlayerHealthChanged(float health)
+        {
+            var normalizedHealth = health / Player.MaxHealth;
+            GameHUD.SetHealth(normalizedHealth);
         }
 
         private void OnDirectionChanged(Vector2 direction)

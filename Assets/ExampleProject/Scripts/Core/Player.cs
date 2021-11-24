@@ -15,21 +15,19 @@ namespace ExampleProject
 
         private Rigidbody Rigidbody;
 
-        private IGameHUD GameHUD;
         private IAudioManager AudioManager;
         private IConfiguration Configuration;
 
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
-
-            GameHUD = CompositionRoot.GetGameHUD();
             AudioManager = CompositionRoot.GetAudioManager();
             Configuration = CompositionRoot.GetConfiguration();
 
             var properties = Configuration.GetPlayerProperties();
 
             Health = properties.StartHealth;
+            MaxHealth = properties.StartHealth;
         }
 
         private void FixedUpdate()
@@ -59,8 +57,9 @@ namespace ExampleProject
                 AudioManager.PlayEffect(EAudio.Crash);
 
                 Health -= 10f;
+                Health = Mathf.Clamp(Health, 0f, MaxHealth);
 
-                GameHUD.SetHP(Health / properties.StartHealth);
+                HealthChanged(Health);
 
                 return;
             }
@@ -70,8 +69,9 @@ namespace ExampleProject
                 AudioManager.PlayEffect(EAudio.Damage);
 
                 Health -= 5f;
+                Health = Mathf.Clamp(Health, 0f, MaxHealth);
 
-                GameHUD.SetHP(Health / properties.StartHealth);
+                HealthChanged(Health);
 
                 return;
             }

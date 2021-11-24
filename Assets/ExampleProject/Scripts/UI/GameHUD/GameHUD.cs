@@ -22,7 +22,7 @@ namespace ExampleProject
             View.Hide();
         }
 
-        public void SetHP(float value)
+        public void SetHealth(float value)
         {
             View.SetHP(value);
         }
