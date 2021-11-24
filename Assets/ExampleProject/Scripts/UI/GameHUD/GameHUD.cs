@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ExampleProject
 {
-    public class GameHUD : MonoBehaviour, IScreen
+    public class GameHUD : MonoBehaviour, IGameHUD
     {
         private IGameHUDView View;
 
@@ -20,6 +20,21 @@ namespace ExampleProject
         public void Hide()
         {
             View.Hide();
+        }
+
+        public void SetHP(float value)
+        {
+            View.SetHP(value);
+        }
+
+        public void SetMana(float value)
+        {
+            View.SetMana(value);
+        }
+
+        public void SetTime(int value)
+        {
+            View.SetTime(value);
         }
     }
 }

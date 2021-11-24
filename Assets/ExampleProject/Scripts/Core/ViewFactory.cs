@@ -19,6 +19,14 @@ namespace ExampleProject
             return view;
         }
 
+        public IGameOverView CreateGameOver()
+        {
+            var view = ResourceManager.CreatePrefabInstance<IGameOverView, EViews>(EViews.GameOver);
+            view.SetParent(UIRoot.OverlayCanvas);
+
+            return view;
+        }
+
         public IMainMenuView CreateMainMenu()
         {
             var view = ResourceManager.CreatePrefabInstance<IMainMenuView, EViews>(EViews.MainMenu);

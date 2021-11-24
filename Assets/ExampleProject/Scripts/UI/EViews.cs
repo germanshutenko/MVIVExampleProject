@@ -4,6 +4,7 @@ namespace ExampleProject
     {
         GameHUD,
         MainMenu,
+        GameOver,
         SettingsMenu
     }
 }

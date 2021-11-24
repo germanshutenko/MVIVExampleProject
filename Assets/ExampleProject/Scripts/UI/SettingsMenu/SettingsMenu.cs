@@ -8,6 +8,7 @@ namespace ExampleProject
         public event Action BackClicked;
 
         private ISettingsMenuView View;
+
         private IGameSettings GameSettings;
 
         private void Awake()
@@ -16,6 +17,7 @@ namespace ExampleProject
             var viewFactory = CompositionRoot.GetViewFactory();
 
             View = viewFactory.CreateSettingsMenu();
+
             View.BackClicked += OnBackClicked;
             View.MusicClicked += OnMusicClicked;
             View.SoundEffectsClicked += OnSoundEffectsClicked;

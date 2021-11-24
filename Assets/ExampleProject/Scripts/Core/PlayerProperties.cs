@@ -7,5 +7,7 @@ namespace ExampleProject
         public float DamageVelocity;
         public float BumpVelocity;
         public float CrashVelocity;
+
+        public float StartHealth;
     }
 }

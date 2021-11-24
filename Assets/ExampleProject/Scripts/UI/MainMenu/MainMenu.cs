@@ -15,6 +15,7 @@ namespace ExampleProject
             var viewFactory = CompositionRoot.GetViewFactory();
 
             View = viewFactory.CreateMainMenu();
+
             View.SettingsClicked += OnSettingsClicked;
             View.NewGameClicked += OnNewGameClicked;
             View.ExitClicked += OnExitClicked;

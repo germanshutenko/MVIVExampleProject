@@ -1,6 +1,6 @@
 namespace ExampleProject
 {
-    public interface IPlayer : IMovable
+    public interface IPlayer : IMovable, IHealth
     {
     }
 }

@@ -14,6 +14,8 @@ namespace ExampleProject
         private static IConfiguration Configuration;
         private static IResourceManager ResourceManager;
 
+        private static IGameHUD GameHUD;
+        private static IGameOver GameOver;
         private static IMainMenu MainMenu;
         private static ISettingsMenu SettingsMenu;
 
@@ -36,6 +38,7 @@ namespace ExampleProject
             ViewFactory = null;
             AudioManager = null;
 
+            GameOver = null;
             MainMenu = null;
             SettingsMenu = null;
         }
@@ -147,6 +150,26 @@ namespace ExampleProject
             }
 
             return SettingsMenu;
+        }
+
+        public static IGameHUD GetGameHUD()
+        {
+            if (GameHUD == null)
+            {
+                GameHUD = MonoExtensions.CreateComponent<GameHUD>();
+            }
+
+            return GameHUD;
+        }
+
+        public static IGameOver GetGameOver()
+        {
+            if (GameOver == null)
+            {
+                GameOver = MonoExtensions.CreateComponent<GameOver>();
+            }
+
+            return GameOver;
         }
     }
 }

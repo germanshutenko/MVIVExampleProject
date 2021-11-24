@@ -11,7 +11,8 @@ namespace ExampleProject
                 MovingForce = 6f,
                 BumpVelocity = 0.2f,
                 DamageVelocity = 2f,
-                CrashVelocity = 4f
+                CrashVelocity = 4f,
+                StartHealth = 100f
             };
         }
 
