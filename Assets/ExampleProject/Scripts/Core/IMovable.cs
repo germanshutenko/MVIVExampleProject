@@ -7,6 +7,8 @@ namespace ExampleProject
     {
         event Action<Vector3> Moved;
 
+        Vector3 Position { get; }
+
         void Move(Vector3 direction);
         void SetPosition(Vector3 position);
     }

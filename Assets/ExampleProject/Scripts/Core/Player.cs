@@ -12,7 +12,8 @@ namespace ExampleProject
 
         public float Health { get; private set; }
         public float MaxHealth { get; private set; }
-
+        public Vector3 Position { get { return transform.position; } }
+        
         private Rigidbody Rigidbody;
 
         private IAudioManager AudioManager;
@@ -50,9 +51,9 @@ namespace ExampleProject
         private void OnCollisionEnter(Collision collision)
         {
             var properties = Configuration.GetPlayerProperties();
-            var velocity = Rigidbody.velocity.magnitude;
+            var force = (collision.impulse / Time.fixedDeltaTime).magnitude;
 
-            if (velocity > properties.CrashVelocity)
+            if (force > properties.CrashForce)
             {
                 AudioManager.PlayEffect(EAudio.Crash);
 
@@ -61,7 +62,7 @@ namespace ExampleProject
                 return;
             }
 
-            if (velocity > properties.DamageVelocity)
+            if (force > properties.DamageForce)
             {
                 AudioManager.PlayEffect(EAudio.Damage);
 
@@ -70,7 +71,7 @@ namespace ExampleProject
                 return;
             }
 
-            if (velocity > properties.BumpVelocity)
+            if (force > properties.BumpForce)
             {
                 AudioManager.PlayEffect(EAudio.Bump);
                 return;

@@ -4,9 +4,9 @@ namespace ExampleProject
     {
         public float MovingForce;
 
-        public float DamageVelocity;
-        public float BumpVelocity;
-        public float CrashVelocity;
+        public float DamageForce;
+        public float BumpForce;
+        public float CrashForce;
 
         public float StartHealth;
     }
