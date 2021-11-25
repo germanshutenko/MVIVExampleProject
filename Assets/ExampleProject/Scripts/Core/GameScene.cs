@@ -19,6 +19,7 @@ namespace ExampleProject
             Player = CompositionRoot.GetPlayer();
             UserInput = CompositionRoot.GetUserInput();
             GameCamera = CompositionRoot.GetGameCamera();
+            SceneManager = CompositionRoot.GetSceneManager();
             Configuration = CompositionRoot.GetConfiguration();
 
             GameHUD = CompositionRoot.GetGameHUD();
@@ -40,6 +41,8 @@ namespace ExampleProject
 
             audioManager.SetMusicActive(isMusicOn);
             audioManager.SetEffectsActive(isSoundEffectsOn);
+
+            audioManager.PlayMusic(EAudio.MainTheme);
 
             UserInput.DirectionChanged += OnDirectionChanged;
             UserInput.Escaped += OpenSettings;

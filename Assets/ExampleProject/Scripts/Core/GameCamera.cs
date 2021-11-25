@@ -8,8 +8,8 @@ namespace ExampleProject
         private const float MaxFOV = 120f;
         private const float MaxSpeed = 10f;
 
-        private const float CameraLerpFOV = 0.01f;
-        private const float CameraLerpSpeed = 0.05f;
+        private const float CameraLerpFOV = 0.02f;
+        private const float CameraLerpSpeed = 0.2f;
         private readonly Vector3 LookAtOffset = Vector3.up * 1f;
 
         public Transform CameraObject;

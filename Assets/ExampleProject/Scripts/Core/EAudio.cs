@@ -4,6 +4,7 @@ namespace ExampleProject
     {
         Bump,
         Damage,
-        Crash
+        Crash,
+        MainTheme
     }
 }
