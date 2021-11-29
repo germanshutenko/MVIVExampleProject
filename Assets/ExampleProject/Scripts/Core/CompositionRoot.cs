@@ -18,19 +18,9 @@ namespace ExampleProject
         private static IResourceManager ResourceManager;
 
         private static IGameHUD GameHUD;
-        private static IGameOverScreen GameOver;
+        private static IGameOverScreen GameOverScreen;
         private static IMainMenu MainMenu;
         private static ISettingsMenu SettingsMenu;
-
-        public static IResourceManager GetResourceManager()
-        {
-            if (ResourceManager == null)
-            {
-                ResourceManager = new ResourceManager();
-            }
-
-            return ResourceManager;
-        }
 
         private void OnDestroy()
         {
@@ -43,9 +33,19 @@ namespace ExampleProject
             AudioManager = null;
 
             GameHUD = null;
-            GameOver = null;
+            GameOverScreen = null;
             MainMenu = null;
             SettingsMenu = null;
+        }
+
+        public static IResourceManager GetResourceManager()
+        {
+            if (ResourceManager == null)
+            {
+                ResourceManager = new ResourceManager();
+            }
+
+            return ResourceManager;
         }
 
         public static IConfiguration GetConfiguration()
@@ -191,12 +191,12 @@ namespace ExampleProject
 
         public static IGameOverScreen GetGameOverScreen()
         {
-            if (GameOver == null)
+            if (GameOverScreen == null)
             {
-                GameOver = MonoExtensions.CreateComponent<GameOverScreen>();
+                GameOverScreen = MonoExtensions.CreateComponent<GameOverScreen>();
             }
 
-            return GameOver;
+            return GameOverScreen;
         }
     }
 }

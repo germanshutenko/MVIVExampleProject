@@ -51,8 +51,8 @@ namespace ExampleProject
             Player.HealthChanged += OnlayerHealthChanged;
             Player.MaxHealthChanged += OnPlayerMaxHealthChanged;
 
+            SettingsMenu.Closing += CloseSettings;
             GameOverScreen.NextClicked += ExitGame;
-            SettingsMenu.BackClicked += CloseSettings;
         }
 
         private void OpenSettings()

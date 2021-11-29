@@ -10,13 +10,16 @@ namespace ExampleProject
 
         public bool IsLocked { get; set; }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Escaped();
             }
+        }
 
+        private void FixedUpdate()
+        {
             if (IsLocked == true)
             {
                 return;

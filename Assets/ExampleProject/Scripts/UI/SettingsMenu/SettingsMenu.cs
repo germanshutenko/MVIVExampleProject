@@ -5,10 +5,11 @@ namespace ExampleProject
 {
     public class SettingsMenu : MonoBehaviour, ISettingsMenu
     {
-        public event Action BackClicked;
+        public event Action Closing = () => { };
 
         private ISettingsMenuView View;
 
+        private IUserInput UserInput;
         private IAudioManager AudioManager;
         private IGameSettings GameSettings;
 
@@ -63,7 +64,7 @@ namespace ExampleProject
 
         private void OnBackClicked()
         {
-            BackClicked();
+            Closing();
         }
     }
 }

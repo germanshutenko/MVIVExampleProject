@@ -13,7 +13,7 @@ namespace ExampleProject
         public float Health { get; private set; }
         public float MaxHealth { get; private set; }
         public Vector3 Position { get { return transform.position; } }
-        
+
         private Rigidbody Rigidbody;
 
         private IAudioManager AudioManager;

@@ -4,6 +4,6 @@ namespace ExampleProject
 {
     public interface ISettingsMenu : IScreen
     {
-        event Action BackClicked;
+        event Action Closing;
     }
 }

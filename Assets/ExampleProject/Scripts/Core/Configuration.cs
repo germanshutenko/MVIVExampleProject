@@ -14,6 +14,8 @@ namespace ExampleProject
                 CrashForce = 400f,
                 StartHealth = 100f
             };
+
+
         }
 
         public PlayerProperties GetPlayerProperties()

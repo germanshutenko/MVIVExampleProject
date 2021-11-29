@@ -22,7 +22,7 @@ namespace ExampleProject
             View.NewGameClicked += OnNewGameClicked;
             View.ExitClicked += OnExitClicked;
 
-            SettingsMenu.BackClicked += OnSettingsMenuClosing;
+            SettingsMenu.Closing += OnSettingsMenuClosing;
         }
 
         public void Show()
